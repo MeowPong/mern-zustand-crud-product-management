@@ -1,4 +1,5 @@
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { MdDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
 import {
 	Box,
 	Button,
@@ -23,7 +24,7 @@ import {
 import { useProductStore } from "../store/product";
 import { useState } from "react";
 
-function ProductCard({product}) {
+const ProductCard = ({ product }) => {
 	const [updatedProduct, setUpdatedProduct] = useState(product);
 
 	const textColor = useColorModeValue("gray.600", "gray.200");
@@ -85,7 +86,7 @@ function ProductCard({product}) {
 			_hover={{ transform: "translateY(-5px)", shadow: "xl" }}
 			bg={bg}
 		>
-			<Image src={product.image} alt={product.name} h={48} w='full' objectFit='cover' />
+			<Image src={product.image} alt={product.name} h={60} w='full' objectFit='cover' />
 
 			<Box p={4}>
 				<Heading as='h3' size='md' mb={2}>
@@ -97,9 +98,9 @@ function ProductCard({product}) {
 				</Text>
 
 				<HStack spacing={2}>
-					<IconButton icon={<EditIcon />} onClick={onOpen} colorScheme='blue' />
+					<IconButton icon={<FaRegEdit />} onClick={onOpen} colorScheme='blue' />
 					<IconButton
-						icon={<DeleteIcon />}
+						icon={<MdDelete />}
 						onClick={() => handleDeleteProduct(product._id)}
 						colorScheme='red'
 					/>
@@ -116,17 +117,20 @@ function ProductCard({product}) {
 						<VStack spacing={4}>
 							<Input
 								placeholder='Product Name'
+								name='name'
 								value={updatedProduct.name}
 								onChange={(e) => setUpdatedProduct({ ...updatedProduct, name: e.target.value })}
 							/>
 							<Input
 								placeholder='Price'
+								name='price'
 								type='number'
 								value={updatedProduct.price}
 								onChange={(e) => setUpdatedProduct({ ...updatedProduct, price: e.target.value })}
 							/>
 							<Input
 								placeholder='Image URL'
+								name='image'
 								value={updatedProduct.image}
 								onChange={(e) => setUpdatedProduct({ ...updatedProduct, image: e.target.value })}
 							/>
